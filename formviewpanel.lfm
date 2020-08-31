@@ -1,0 +1,71 @@
+object FrmView: TFrmView
+  Left = 623
+  Height = 492
+  Top = 283
+  Width = 662
+  Caption = 'Что? Где? Когда? [Счет]'
+  ClientHeight = 492
+  ClientWidth = 662
+  Color = clBlue
+  DefaultMonitor = dmMainForm
+  DesignTimePPI = 120
+  KeyPreview = True
+  OnKeyDown = FormKeyDown
+  OnResize = FormResize
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object PnlRight: TPanel
+    Left = 344
+    Height = 492
+    Top = 0
+    Width = 318
+    Align = alRight
+    Caption = '0'
+    ClientHeight = 492
+    ClientWidth = 318
+    Font.Color = clWhite
+    Font.Height = 400
+    ParentFont = False
+    TabOrder = 0
+    object LblNameRight: TLabel
+      Left = 50
+      Height = 1
+      Top = 16
+      Width = 1
+      Color = clBlue
+      Font.Color = clWhite
+      Font.Height = 50
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+    end
+  end
+  object PnlLeft: TPanel
+    Left = 0
+    Height = 492
+    Top = 0
+    Width = 344
+    Align = alClient
+    Caption = '0'
+    ClientHeight = 492
+    ClientWidth = 344
+    Color = clWhite
+    Font.Color = clBlue
+    Font.Height = 400
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 1
+    object LblNameLeft: TLabel
+      Left = 50
+      Height = 1
+      Top = 16
+      Width = 1
+      Color = clWhite
+      Font.Color = clBlue
+      Font.Height = 50
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+    end
+  end
+end
