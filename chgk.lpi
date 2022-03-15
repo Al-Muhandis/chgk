@@ -21,7 +21,8 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <BuildNr Value="1"/>
+      <AutoIncrementBuild Value="True"/>
+      <BuildNr Value="3"/>
       <Language Value="0419"/>
       <StringTable LegalCopyright="Suleymanov Renat, Astrakhan"/>
     </VersionInfo>
@@ -87,6 +88,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
+              <DebugInfoType Value="dsDwarf2Set"/>
             </Debugging>
             <LinkSmart Value="True"/>
             <Options>
@@ -110,7 +112,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="chgk.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -129,6 +131,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="telegram.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
