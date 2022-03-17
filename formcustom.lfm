@@ -1,0 +1,12 @@
+object FrmMonitorControl: TFrmMonitorControl
+  Left = 183
+  Height = 533
+  Top = 88
+  Width = 642
+  Caption = 'Раздаточный материал'
+  DefaultMonitor = dmMainForm
+  DesignTimePPI = 120
+  OnKeyDown = FormKeyDown
+  LCLVersion = '2.2.0.4'
+  Visible = True
+end

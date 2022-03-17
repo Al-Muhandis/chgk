@@ -22,7 +22,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="3"/>
+      <MinorVersionNr Value="1"/>
       <Language Value="0419"/>
       <StringTable LegalCopyright="Suleymanov Renat, Astrakhan"/>
     </VersionInfo>
@@ -107,12 +107,15 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <RequiredPackages Count="1">
+    <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="fptelegram"/>
       </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="chgk.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -135,6 +138,13 @@
         <Filename Value="telegram.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="formcustom.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmMonitorControl"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

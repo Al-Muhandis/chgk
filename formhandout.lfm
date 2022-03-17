@@ -1,0 +1,14 @@
+inherited FrmHandout: TFrmHandout
+  Left = 436
+  Top = 184
+  object Img: TImage[0]
+    Left = 0
+    Height = 533
+    Top = 0
+    Width = 642
+    Align = alClient
+    Center = True
+    Proportional = True
+    Stretch = True
+  end
+end

@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, formviewpanel, formcontrol
-  { you can add units after this };
+  Forms, formcontrol, formviewpanel, formhandout
+  ;
 
 {$R *.res}
 
@@ -19,6 +19,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TFrmControl, FrmControl);
   Application.CreateForm(TFrmView, FrmView);
+  Application.CreateForm(TFrmHandout, FrmHandout);
   Application.Run;
 end.
 

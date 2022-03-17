@@ -1,4 +1,4 @@
-object FrmView: TFrmView
+inherited FrmView: TFrmView
   Left = 623
   Height = 492
   Top = 283
@@ -7,14 +7,10 @@ object FrmView: TFrmView
   ClientHeight = 492
   ClientWidth = 662
   Color = clBlue
-  DefaultMonitor = dmMainForm
-  DesignTimePPI = 120
   KeyPreview = True
-  OnKeyDown = FormKeyDown
   OnResize = FormResize
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
-  object PnlRight: TPanel
+  object PnlRight: TPanel[0]
     Left = 344
     Height = 492
     Top = 0
@@ -23,8 +19,10 @@ object FrmView: TFrmView
     Caption = '0'
     ClientHeight = 492
     ClientWidth = 318
+    Color = clBlue
     Font.Color = clWhite
     Font.Height = 400
+    ParentColor = False
     ParentFont = False
     TabOrder = 0
     object LblNameRight: TLabel
@@ -35,12 +33,11 @@ object FrmView: TFrmView
       Color = clBlue
       Font.Color = clWhite
       Font.Height = 50
-      ParentColor = False
       ParentFont = False
       Transparent = False
     end
   end
-  object PnlLeft: TPanel
+  object PnlLeft: TPanel[1]
     Left = 0
     Height = 492
     Top = 0
@@ -63,7 +60,6 @@ object FrmView: TFrmView
       Color = clWhite
       Font.Color = clBlue
       Font.Height = 50
-      ParentColor = False
       ParentFont = False
       Transparent = False
     end

@@ -6,27 +6,29 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLType,
-  ExtCtrls
+  ExtCtrls, formcustom
   ;
 
 type
 
   { TFrmView }
 
-  TFrmView = class(TForm)
+  TFrmView = class(TFrmMonitorControl)
     LblNameLeft: TLabel;
     LblNameRight: TLabel;
     PnlRight: TPanel;
     PnlLeft: TPanel;
-    procedure FormKeyDown(Sender: TObject; var Key: Word; {%H-}Shift: TShiftState);
-    procedure FormResize(Sender: TObject);
+    procedure FormResize({%H-}Sender: TObject);
   private
-    FOriginalBounds: TRect;
-    FOriginalWindowState: TWindowState;
-    procedure ChangeFontSize(aPanel: TPanel);
-    procedure ChangeFontSizeName(aLabel: TLabel);
+    procedure SetLeftScore(AValue: String);
+    procedure SetLeftTitle(AValue: String);
+    procedure SetRightScore(AValue: String);
+    procedure SetRightTitle(AValue: String);
   public
-    procedure SwitchFullScreen(aMonitor: SmallInt = -1);
+    property LeftTitle: String write SetLeftTitle;
+    property RightTitle: String write SetRightTitle;
+    property LeftScore: String write SetLeftScore;
+    property RightScore: String write SetRightScore;
   end;
 
 var
@@ -38,16 +40,6 @@ implementation
 
 { TFrmView }
 
-procedure TFrmView.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
-  );
-begin
-  if Key = VK_F11 then
-  begin
-    SwitchFullScreen;
-    Key := 0;
-  end;
-end;
-
 procedure TFrmView.FormResize(Sender: TObject);
 begin
   PnlRight.Width:=Width div 2;
@@ -57,38 +49,24 @@ begin
   ChangeFontSizeName(LblNameRight);
 end;
 
-procedure TFrmView.ChangeFontSize(aPanel: TPanel);
+procedure TFrmView.SetLeftScore(AValue: String);
 begin
-  aPanel.Font.Height:=trunc(aPanel.Height*1.2);
+  PnlLeft.Caption:=AValue;
 end;
 
-procedure TFrmView.ChangeFontSizeName(aLabel: TLabel);
+procedure TFrmView.SetLeftTitle(AValue: String);
 begin
-  aLabel.Font.Height:=Height div 10;
+  LblNameLeft.Caption:=AValue;
 end;
 
-procedure TFrmView.SwitchFullScreen(aMonitor: SmallInt);
+procedure TFrmView.SetRightScore(AValue: String);
 begin
-  if Visible=False then
-    Show;
-  if BorderStyle <> bsNone then begin
-    // To full screen
-    FOriginalWindowState := WindowState;
-    FOriginalBounds := BoundsRect;
+  PnlRight.Caption:=AValue;
+end;
 
-    BorderStyle := bsNone;
-    if (Screen.MonitorCount=1) or (aMonitor=-1) then
-      BoundsRect := Screen.MonitorFromWindow(Handle, mdNearest).BoundsRect
-    else
-      BoundsRect:=Screen.Monitors[aMonitor].BoundsRect;
-  end else begin
-    // From full screen
-    BorderStyle := bsSizeable;
-    if FOriginalWindowState = wsMaximized then
-      WindowState := wsMaximized
-    else
-      BoundsRect := FOriginalBounds;
-  end;
+procedure TFrmView.SetRightTitle(AValue: String);
+begin
+  LblNameRight.Caption:=AValue;
 end;
 
 end.
