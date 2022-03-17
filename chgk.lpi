@@ -110,6 +110,7 @@
     <RequiredPackages Count="2">
       <Item1>
         <PackageName Value="fptelegram"/>
+        <MinVersion Release="2" Build="9" Valid="True"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
