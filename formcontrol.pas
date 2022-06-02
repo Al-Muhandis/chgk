@@ -141,7 +141,7 @@ begin
   FTelegramHandout:=TTelegramFace.Create;
   aLogger:=TEventLog.Create(nil);
   aLogger.LogType:=ltFile;
-  aLogger.Active:=False;
+  aLogger.Active:=True;
   FTelegramScore.Bot.Logger:=aLogger;
   FTelegramScore.Bot.LogDebug:=True;
   FTelegramHandout.Bot.Logger:=aLogger;

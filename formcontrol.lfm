@@ -14,7 +14,7 @@ object FrmControl: TFrmControl
   OnShow = FormShow
   Position = poScreenCenter
   SessionProperties = 'ChckBxTelegram.Checked;EdtChat.Text;EdtHandoutFile.FileName;EdtNameLeft.Text;EdtNameRight.Text;EdtToken.Text;RdGrpMonitors.ItemIndex;SpnEdtScoreLeft.Value;SpnEdtScoreRight.Value;ChckBxTelegramScoreWhileMaximize.Checked;ChckBxTelegramHandout.Checked'
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.2.0'
   object PgCntrlMain: TPageControl
     Left = 0
     Height = 288
@@ -45,6 +45,7 @@ object FrmControl: TFrmControl
         Top = 104
         Width = 74
         Caption = 'Счет слева'
+        ParentColor = False
       end
       object SpnEdtScoreRight: TSpinEdit
         Left = 256
@@ -63,6 +64,7 @@ object FrmControl: TFrmControl
         Top = 104
         Width = 84
         Caption = 'Счет справа'
+        ParentColor = False
       end
       object EdtNameLeft: TLabeledEdit
         Left = 16
@@ -72,6 +74,7 @@ object FrmControl: TFrmControl
         EditLabel.Height = 20
         EditLabel.Width = 208
         EditLabel.Caption = 'Слева'
+        EditLabel.ParentColor = False
         Font.Height = 24
         ParentFont = False
         TabOrder = 2
@@ -85,6 +88,7 @@ object FrmControl: TFrmControl
         EditLabel.Height = 20
         EditLabel.Width = 208
         EditLabel.Caption = 'Справа'
+        EditLabel.ParentColor = False
         Font.Height = 24
         ParentFont = False
         TabOrder = 3
@@ -139,6 +143,7 @@ object FrmControl: TFrmControl
         Width = 136
         Caption = 'Файл изображения'
         FocusControl = EdtHandoutFile
+        ParentColor = False
       end
     end
     object TbShtOptions: TTabSheet
@@ -167,6 +172,7 @@ object FrmControl: TFrmControl
             EditLabel.Height = 20
             EditLabel.Width = 436
             EditLabel.Caption = 'Токен бота'
+            EditLabel.ParentColor = False
             TabOrder = 0
           end
           object EdtChat: TLabeledEdit
@@ -177,6 +183,7 @@ object FrmControl: TFrmControl
             EditLabel.Height = 20
             EditLabel.Width = 288
             EditLabel.Caption = 'ID чата (канал, группа или личный чат)'
+            EditLabel.ParentColor = False
             TabOrder = 1
           end
           object ChckBxTelegram: TCheckBox
