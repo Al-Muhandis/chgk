@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  IniPropStorage, ExtCtrls, ComCtrls, EditBtn, Telegram
+  IniPropStorage, ExtCtrls, ComCtrls, EditBtn, Telegram, tgtypes
   ;
 
 type
@@ -30,16 +30,22 @@ type
     EdtNameLeft: TLabeledEdit;
     EdtToken: TLabeledEdit;
     EdtChat: TLabeledEdit;
+    Memo1: TMemo;
+    PgCntrlControl: TPageControl;
     PgCntrlMain: TPageControl;
     PgCntrlOptions: TPageControl;
     RdGrpMonitors: TRadioGroup;
     SpnEdtScoreLeft: TSpinEdit;
     SpnEdtScoreRight: TSpinEdit;
+    TbShtAnswers: TTabSheet;
+    TbShtControlScore: TTabSheet;
     TbShtTelegram: TTabSheet;
     TbShtMonitors: TTabSheet;
     TbShtHandout: TTabSheet;
     TbShtHome: TTabSheet;
     TbShtOptions: TTabSheet;
+    TglBxReceive: TToggleBox;
+    ToolBar1: TToolBar;
     procedure BtnFullScreenClick({%H-}Sender: TObject);
     procedure BtnHandoutClick({%H-}Sender: TObject);
     procedure BtnScoreAddLeftClick({%H-}Sender: TObject);
@@ -53,7 +59,9 @@ type
     procedure FormShow({%H-}Sender: TObject);
     procedure SpnEdtScoreLeftChange(Sender: TObject);
     procedure SpnEdtScoreRightChange(Sender: TObject);
+    procedure TglBxReceiveChange(Sender: TObject);
   private
+    FTelegramReceiver: TReceiverThread;
     FTelegramScore: TTelegramFace;
     FTelegramHandout: TTelegramFace;
     FDoUpdateTelegram: Boolean;
@@ -62,6 +70,7 @@ type
     procedure DoMaximizeHandout(aForm: TForm);
     procedure DoUpdateScore;    
     procedure DoUpdateHandout;
+    procedure FormAppendMessage(aMsg: TTelegramMessageObj);
     procedure FormHandoutMaximizeWindow(Sender: TObject);
     procedure FormScoreMaximizeWindow(Sender: TObject);
   public
@@ -74,7 +83,7 @@ var
 implementation
 
 uses
-  formviewpanel, formhandout, eventlog
+  formviewpanel, formhandout, eventlog, tgutils, DateUtils
   ;
 
 {$R *.lfm}
@@ -152,6 +161,11 @@ end;
 
 procedure TFrmControl.FormDestroy(Sender: TObject);
 begin
+  if Assigned(FTelegramReceiver) then
+  begin
+    FTelegramReceiver.Terminate;
+    FTelegramReceiver.WaitFor;
+  end;
   FTelegramScore.Bot.Logger.Free;
   FTelegramHandout.Free;
   FTelegramScore.Free;
@@ -168,7 +182,7 @@ begin
   RdGrpMonitors.Enabled:=Screen.MonitorCount>1;
   FDoUpdateTelegram:=True;
   DoChangeScore;
-  FrmHandout.LoadFromFile(EdtHandoutFile.FileName);
+  FrmHandout.LoadFromFile();
   FrmView.OnMaximizeWindow:=@FormScoreMaximizeWindow;
   FrmHandout.OnMaximizeWindow:=@FormHandoutMaximizeWindow;
 end;
@@ -187,6 +201,28 @@ begin
     Exit;
   FrmView.RightScore:=(Sender as TSpinEdit).Value.ToString;
   DoChangeScore;
+end;
+
+procedure TFrmControl.TglBxReceiveChange(Sender: TObject);
+begin
+  TglBxReceive.Enabled:=False;
+  try
+    if (Sender as TToggleBox).Checked then
+    begin
+      FTelegramReceiver:=TReceiverThread.Create(EmptyStr);
+      FTelegramReceiver.FreeOnTerminate:=True;
+      FTelegramReceiver.OnAppendMessage:=@FormAppendMessage;
+      FTelegramReceiver.Bot.Token:=EdtToken.Text;
+      FTelegramReceiver.Start;
+    end
+    else begin
+      FTelegramReceiver.Terminate;
+      FTelegramReceiver.WaitFor;
+      FTelegramReceiver:=nil;
+    end;
+  finally
+    TglBxReceive.Enabled:=True;
+  end;
 end;
 
 procedure TFrmControl.DoChangeScore;
@@ -245,7 +281,7 @@ begin
   aStream:=TMemoryStream.Create;
   Cursor:=crHourGlass;
   try
-    aStream.LoadFromFile(EdtHandoutFile.FileName);
+    aStream.LoadFromFile(FrmHandout.FileName);
     if EdtToken.Text<>EmptyStr then
       if TryStrToInt64(Trim(EdtChat.Text), aChatID) then
       begin
@@ -257,6 +293,11 @@ begin
     Cursor:=crDefault;
     aStream.Free;
   end;
+end;
+
+procedure TFrmControl.FormAppendMessage(aMsg: TTelegramMessageObj);
+begin
+  Memo1.Lines.Add(aMsg.Text+' / '+CaptionFromUser(aMsg.From)+' ['+DateTimeToStr(UnixToDateTime(aMsg.Date, False))+']');
 end;
 
 procedure TFrmControl.FormHandoutMaximizeWindow(Sender: TObject);

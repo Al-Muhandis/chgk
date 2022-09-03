@@ -5,7 +5,7 @@ unit telegram;
 interface
 
 uses
-  Classes, SysUtils, tgsendertypes, taskworker
+  Classes, SysUtils, tgsendertypes, taskworker, tgtypes
   ;
 
 type
@@ -67,11 +67,79 @@ type
     property ReSendInsteadEdit: Boolean read GetReSendInsteadEdit write SetReSendInsteadEdit;
   end;
 
+  TOnAppendMessage = procedure (aMsg: TTelegramMessageObj) of object;
+
+  { TReceiverThread }
+
+  TReceiverThread=class(TThread)
+  private
+    FBot: TTelegramSender;
+    FOnAppendMessage: TOnAppendMessage;
+    FLPTimeout: Integer;
+    procedure BotReceiveMessage({%H-}ASender: TObject; {%H-}AMessage: TTelegramMessageObj);
+    procedure BotStartCommandHandler({%H-}ASender: TObject; const {%H-}ACommand: String;
+      {%H-}AMessage: TTelegramMessageObj);
+    procedure SendMsgToMainThread;
+  public
+    constructor Create(const AToken: String);
+    destructor Destroy; override;
+    procedure Execute; override;
+    property Bot: TTelegramSender read FBot write FBot;
+    property OnAppendMessage: TOnAppendMessage read FOnAppendMessage write FOnAppendMessage;
+  end;
+
 implementation
 
 uses
-  Graphics, fpjson
+  Graphics, fpjson, eventlog
   ;
+
+{ TReceiverThread }
+
+procedure TReceiverThread.BotReceiveMessage(ASender: TObject; AMessage: TTelegramMessageObj);
+begin
+  if AMessage.Chat.ChatType=ctPrivate then
+    Synchronize(@SendMsgToMainThread);
+end;
+
+procedure TReceiverThread.BotStartCommandHandler(ASender: TObject; const ACommand: String;
+  AMessage: TTelegramMessageObj);
+begin
+  FBot.sendMessage('Hi! This is HelloWorld bot (Long Polling) developed in Lazarus');
+end;
+
+procedure TReceiverThread.SendMsgToMainThread;
+begin
+  if Assigned(FOnAppendMessage) then
+    FOnAppendMessage(FBot.CurrentUpdate.Message);
+end;
+
+constructor TReceiverThread.Create(const AToken: String);
+begin
+  inherited Create(True);
+  FreeOnTerminate:=False;
+  FBot:=TTelegramSender.Create(AToken);
+  FBot.Logger:=TEventLog.Create(nil);
+  FBot.Logger.LogType:=ltFile;
+  FBot.Logger.FileName:='receiver.log';
+  FBot.LogDebug:=True;
+  FBot.CommandHandlers['/start']:=@BotStartCommandHandler;
+  FBot.OnReceiveMessage:=@BotReceiveMessage;
+  FLPTimeout:=6;
+end;
+
+destructor TReceiverThread.Destroy;
+begin
+  FBot.Logger.Free;
+  FreeAndNil(FBot);
+  inherited Destroy;
+end;
+
+procedure TReceiverThread.Execute;
+begin
+  while not Terminated do
+    FBot.getUpdatesEx(0, FLPTimeout);
+end;
 
 { TTelegramTask }
 

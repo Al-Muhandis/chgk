@@ -3,12 +3,38 @@ inherited FrmHandout: TFrmHandout
   Top = 184
   object Img: TImage[0]
     Left = 0
-    Height = 533
-    Top = 0
+    Height = 500
+    Top = 33
     Width = 642
     Align = alClient
     Center = True
     Proportional = True
     Stretch = True
+  end
+  object ToolBar1: TToolBar[1]
+    Left = 0
+    Height = 33
+    Top = 0
+    Width = 642
+    Caption = 'ToolBar1'
+    ShowCaptions = True
+    TabOrder = 0
+    object ToolButton1: TToolButton
+      Left = 1
+      Top = 2
+      Caption = 'Очистить'
+      OnClick = ToolButton1Click
+      ParentShowHint = False
+    end
+    object ToolButton2: TToolButton
+      Left = 73
+      Top = 2
+      Caption = 'Открыть'
+      OnClick = ToolButton2Click
+    end
+  end
+  object OpenDialog1: TOpenDialog[2]
+    Left = 156
+    Top = 79
   end
 end
