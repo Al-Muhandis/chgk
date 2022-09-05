@@ -105,7 +105,7 @@ end;
 procedure TReceiverThread.BotStartCommandHandler(ASender: TObject; const ACommand: String;
   AMessage: TTelegramMessageObj);
 begin
-  FBot.sendMessage('Hi! This is HelloWorld bot (Long Polling) developed in Lazarus');
+  FBot.sendMessage('Это телеграм бот исламской интеллектуальной лиги');
 end;
 
 procedure TReceiverThread.SendMsgToMainThread;
@@ -137,8 +137,13 @@ end;
 
 procedure TReceiverThread.Execute;
 begin
-  while not Terminated do
-    FBot.getUpdatesEx(0, FLPTimeout);
+  try
+    while not Terminated do
+      FBot.getUpdatesEx(0, FLPTimeout);
+  except
+    on E: Exception do
+      FBot.Logger.Error(E.ClassName+': '+ E.Message);
+  end;
 end;
 
 { TTelegramTask }

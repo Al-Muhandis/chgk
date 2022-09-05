@@ -18,6 +18,7 @@ type
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
+    procedure FormWindowStateChange(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton2Click(Sender: TObject);
   private
@@ -39,6 +40,14 @@ implementation
 procedure TFrmHandout.ToolButton1Click(Sender: TObject);
 begin
   Img.Picture.Clear;
+end;
+
+procedure TFrmHandout.FormWindowStateChange(Sender: TObject);
+begin
+  if (WindowState=wsFullScreen) or (WindowState=wsMaximized) then
+    ToolBar1.Hide
+  else
+    ToolBar1.Show;
 end;
 
 procedure TFrmHandout.ToolButton2Click(Sender: TObject);

@@ -1,6 +1,7 @@
 inherited FrmHandout: TFrmHandout
   Left = 436
   Top = 184
+  OnWindowStateChange = FormWindowStateChange
   object Img: TImage[0]
     Left = 0
     Height = 500

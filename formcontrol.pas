@@ -217,7 +217,7 @@ begin
     end
     else begin
       FTelegramReceiver.Terminate;
-      FTelegramReceiver.WaitFor;
+      FTelegramReceiver.WaitFor;  
       FTelegramReceiver:=nil;
     end;
   finally
