@@ -23,7 +23,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="10"/>
+      <BuildNr Value="11"/>
       <Language Value="0419"/>
       <StringTable LegalCopyright="Suleymanov Renat, Astrakhan"/>
     </VersionInfo>

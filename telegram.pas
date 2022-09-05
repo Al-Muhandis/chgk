@@ -286,6 +286,7 @@ end;
 destructor TTelegramFace.Destroy;
 begin
   FThread.TerminateWorker;
+  FThread.WaitFor;
   FThread.Free;
   inherited Destroy;
 end;
