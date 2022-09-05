@@ -105,7 +105,7 @@ end;
 procedure TReceiverThread.BotStartCommandHandler(ASender: TObject; const ACommand: String;
   AMessage: TTelegramMessageObj);
 begin
-  FBot.sendMessage('Это телеграм бот исламской интеллектуальной лиги');
+  FBot.sendMessage('Это телеграм бот для приема ответов');
 end;
 
 procedure TReceiverThread.SendMsgToMainThread;
