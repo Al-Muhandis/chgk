@@ -14,15 +14,15 @@ object FrmControl: TFrmControl
   OnShow = FormShow
   Position = poScreenCenter
   SessionProperties = 'ChckBxTelegram.Checked;ChckBxTelegramHandout.Checked;ChckBxTelegramScoreWhileMaximize.Checked;EdtChat.Text;EdtNameLeft.Text;EdtNameRight.Text;EdtToken.Text;RdGrpMonitors.ItemIndex;SpnEdtScoreLeft.Value;SpnEdtScoreRight.Value'
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
   object PgCntrlMain: TPageControl
     Left = 0
     Height = 288
     Top = 0
     Width = 492
-    ActivePage = TbShtOptions
+    ActivePage = TbShtHome
     Align = alTop
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TbShtHome: TTabSheet
       Caption = 'Управление'
