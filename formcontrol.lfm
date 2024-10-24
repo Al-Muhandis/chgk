@@ -14,7 +14,7 @@ object FrmControl: TFrmControl
   OnShow = FormShow
   Position = poScreenCenter
   SessionProperties = 'ChckBxTelegram.Checked;ChckBxTelegramHandout.Checked;ChckBxTelegramScoreWhileMaximize.Checked;EdtChat.Text;EdtNameLeft.Text;EdtNameRight.Text;EdtToken.Text;RdGrpMonitors.ItemIndex;SpnEdtScoreLeft.Value;SpnEdtScoreRight.Value'
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.2.0.0'
   object PgCntrlMain: TPageControl
     Left = 0
     Height = 288
@@ -117,9 +117,9 @@ object FrmControl: TFrmControl
             Caption = '+'
             Font.Height = 30
             Font.Style = [fsBold]
-            OnClick = BtnScoreAddLeftClick
             ParentFont = False
             TabOrder = 4
+            OnClick = BtnScoreAddLeftClick
           end
           object BtnScoreAddRight: TButton
             Left = 376
@@ -129,9 +129,9 @@ object FrmControl: TFrmControl
             Caption = '+'
             Font.Height = 30
             Font.Style = [fsBold]
-            OnClick = BtnScoreAddRightClick
             ParentFont = False
             TabOrder = 5
+            OnClick = BtnScoreAddRightClick
           end
         end
         object TbShtAnswers: TTabSheet
@@ -162,8 +162,8 @@ object FrmControl: TFrmControl
               Top = 2
               Width = 94
               Caption = 'Принимать'
-              OnChange = TglBxReceiveChange
               TabOrder = 0
+              OnChange = TglBxReceiveChange
             end
           end
         end
@@ -240,16 +240,16 @@ object FrmControl: TFrmControl
             Left = 8
             Height = 24
             Top = 8
-            Width = 191
+            Width = 188
             Caption = 'Синхронизировать счёт'
-            OnChange = ChckBxTelegramChange
             TabOrder = 2
+            OnChange = ChckBxTelegramChange
           end
           object ChckBxTelegramHandout: TCheckBox
             Left = 8
             Height = 24
             Top = 64
-            Width = 399
+            Width = 396
             Caption = 'Отправлять "раздатку" при разворачивании на экран'
             TabOrder = 3
           end
@@ -257,7 +257,7 @@ object FrmControl: TFrmControl
             Left = 48
             Height = 24
             Top = 32
-            Width = 270
+            Width = 267
             Caption = 'Только при разворачивании табло'
             TabOrder = 4
           end
@@ -300,8 +300,8 @@ object FrmControl: TFrmControl
     Top = 296
     Width = 448
     Caption = 'Развернуть/свернуть табло (F11)'
-    OnClick = BtnFullScreenClick
     TabOrder = 1
+    OnClick = BtnFullScreenClick
   end
   object BtnHandout: TButton
     Left = 16
@@ -309,8 +309,8 @@ object FrmControl: TFrmControl
     Top = 344
     Width = 448
     Caption = 'Раздаточный материал (F11)'
-    OnClick = BtnHandoutClick
     TabOrder = 2
+    OnClick = BtnHandoutClick
   end
   object InPrpStrg: TIniPropStorage
     StoredValues = <>
