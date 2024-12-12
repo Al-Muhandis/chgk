@@ -23,7 +23,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="11"/>
+      <BuildNr Value="12"/>
       <Language Value="0419"/>
       <StringTable LegalCopyright="Suleymanov Renat, Astrakhan"/>
     </VersionInfo>
@@ -38,7 +38,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="..\..\taskworker"/>
+            <OtherUnitFiles Value="..\use\taskworker"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -79,7 +79,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="..\..\taskworker"/>
+            <OtherUnitFiles Value="..\use\taskworker"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -150,7 +150,7 @@
         <ResourceBaseClass Value="Form"/>
       </Unit4>
       <Unit5>
-        <Filename Value="..\..\taskworker\taskworker.pas"/>
+        <Filename Value="..\use\taskworker\taskworker.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
     </Units>
@@ -163,7 +163,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\..\taskworker"/>
+      <OtherUnitFiles Value="..\use\taskworker"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
